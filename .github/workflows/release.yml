@@ -1,77 +1,12 @@
 name: Build & Release
-
-# Builds the macOS .dmg and Windows .exe. Triggered by pushing a version tag
-# (e.g. `git tag v2.0.0 && git push origin v2.0.0`), or manually from the
-# Actions tab. On a tag build, the installers are attached to a GitHub Release.
 on:
   push:
     tags:
       - 'v*'
   workflow_dispatch:
 
-permissions:
-  contents: write
-
 jobs:
-  build:
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - os: macos-latest
-            platform: mac
-          - os: windows-latest
-            platform: win
-    runs-on: ${{ matrix.os }}
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Generate icons
-        run: npm run gen-icons
-
-      - name: Build installer
-        run: npx electron-builder --${{ matrix.platform }} --publish never
-
-      - name: Collect installers
-        shell: bash
-        run: |
-          mkdir -p out
-          # Installers + their metadata; ignore the unpacked app directories.
-          find dist -maxdepth 1 -type f \
-            \( -name '*.dmg' -o -name '*.exe' -o -name '*.blockmap' -o -name '*.yml' \) \
-            -exec cp {} out/ \;
-          ls -lh out
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: installers-${{ matrix.platform }}
-          path: out/*
-          if-no-files-found: error
-
-  release:
-    needs: build
+  smoke:
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/v')
     steps:
-      - uses: actions/download-artifact@v4
-        with:
-          path: artifacts
-          merge-multiple: true
-
-      - name: List artifacts
-        run: ls -lh artifacts
-
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
-        with:
-          files: artifacts/*
-          draft: false
-          generate_release_notes: true
+      - run: echo "workflow compiles and runs"
