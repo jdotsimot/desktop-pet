@@ -1,0 +1,165 @@
+/* Bitty the Robot — grey/teal, blinking antenna, powers down when overwhelmed. */
+.pet--robot .pet-body {
+  width: 54px;
+  height: 64px;
+}
+
+.pet--robot .r-antenna {
+  position: absolute;
+  bottom: 56px;
+  left: 25px;
+  width: 3px;
+  height: 10px;
+  background-color: #7d8896;
+  border-radius: 2px;
+  z-index: 3;
+  transform-origin: bottom center;
+}
+
+.pet--robot .r-antenna-tip {
+  position: absolute;
+  top: -5px;
+  left: -2px;
+  width: 7px;
+  height: 7px;
+  background-color: #59c2c9;
+  border-radius: 50%;
+  animation: robot-blink 2s infinite;
+  box-shadow: 0 0 6px rgba(89, 194, 201, 0.8);
+}
+
+@keyframes robot-blink {
+  0%, 60%, 100% { opacity: 1; }
+  75% { opacity: 0.2; }
+}
+
+.pet--robot .r-head {
+  position: absolute;
+  bottom: 32px;
+  left: 7px;
+  width: 40px;
+  height: 26px;
+  background-color: #9aa5b1;
+  border-radius: 8px;
+  box-shadow: inset -3px -3px 0px #7d8896;
+  z-index: 2;
+  transition: filter 0.5s ease, transform 0.5s ease;
+}
+
+.pet--robot .r-screen {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 30px;
+  height: 16px;
+  background-color: #22262e;
+  border-radius: 5px;
+  transition: background-color 0.5s ease;
+}
+
+.pet--robot .r-eye {
+  position: absolute;
+  top: 5px;
+  width: 5px;
+  height: 6px;
+  background-color: #59c2c9;
+  border-radius: 2px;
+  transition: opacity 0.4s ease;
+  animation: robot-eye-flicker 4s infinite;
+}
+
+.pet--robot .r-eye.left { left: 7px; }
+.pet--robot .r-eye.right { right: 7px; }
+
+@keyframes robot-eye-flicker {
+  0%, 92%, 100% { transform: scaleY(1); }
+  95% { transform: scaleY(0.1); }
+}
+
+.pet--robot .r-torso {
+  position: absolute;
+  bottom: 10px;
+  left: 12px;
+  width: 30px;
+  height: 22px;
+  background-color: #8792a0;
+  border-radius: 5px 5px 8px 8px;
+  box-shadow: inset -3px -3px 0px #6f7a88;
+  z-index: 1;
+  transition: filter 0.5s ease;
+}
+
+.pet--robot .r-light {
+  position: absolute;
+  top: 6px;
+  left: 12px;
+  width: 6px;
+  height: 6px;
+  background-color: #e8b04b;
+  border-radius: 50%;
+  animation: robot-blink 3s infinite 1s;
+}
+
+.pet--robot .r-foot {
+  position: absolute;
+  bottom: 4px;
+  width: 12px;
+  height: 7px;
+  background-color: #6f7a88;
+  border-radius: 3px;
+  z-index: 0;
+  transition: all 0.3s ease;
+}
+
+.pet--robot .r-foot.left { left: 12px; }
+.pet--robot .r-foot.right { right: 12px; }
+
+/* States */
+.pet--robot.is-idle .r-head {
+  animation: robot-idle-bob 3.4s infinite ease-in-out;
+}
+
+@keyframes robot-idle-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
+.pet--robot.is-walking .r-foot.left { animation: robot-step 0.4s infinite; }
+.pet--robot.is-walking .r-foot.right { animation: robot-step 0.4s infinite reverse; }
+
+@keyframes robot-step {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+.pet--robot.is-happy .r-antenna {
+  animation: robot-antenna-spin 0.5s linear infinite;
+}
+
+@keyframes robot-antenna-spin {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(25deg); }
+  75% { transform: rotate(-25deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.pet--robot.is-happy .r-eye {
+  background-color: #7be3a8;
+}
+
+/* Power-down: screen dark, lights off, slump. */
+.pet--robot.is-retreated .r-head {
+  filter: brightness(0.55);
+  transform: translateY(4px) rotate(-3deg);
+}
+
+.pet--robot.is-retreated .r-torso {
+  filter: brightness(0.55);
+}
+
+.pet--robot.is-retreated .r-eye,
+.pet--robot.is-retreated .r-antenna-tip,
+.pet--robot.is-retreated .r-light {
+  animation: none;
+  opacity: 0;
+}

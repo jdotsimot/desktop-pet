@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Monochrome tortoise silhouette for the macOS menu bar (template image) -->
+  <g fill="#000000">
+    <path d="M 5 22 A 10.5 10.5 0 0 1 26 22 Z"/>
+    <rect x="6" y="22" width="16" height="3.4" rx="1.6"/>
+    <circle cx="25.5" cy="21" r="3.6"/>
+    <rect x="8" y="25" width="3.4" height="3.2" rx="1.2"/>
+    <rect x="17" y="25" width="3.4" height="3.2" rx="1.2"/>
+  </g>
+</svg>

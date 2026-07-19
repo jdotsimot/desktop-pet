@@ -1,0 +1,178 @@
+/* Mocha the Lofi Cat — loaf cat with headphones, sleeps when overwhelmed. */
+.pet--cat .pet-body {
+  width: 66px;
+  height: 60px;
+}
+
+.pet--cat .k-body {
+  position: absolute;
+  bottom: 8px;
+  left: 4px;
+  width: 44px;
+  height: 22px;
+  background-color: #b08968;
+  border-radius: 16px 12px 10px 10px;
+  box-shadow: inset -4px -4px 0px #967053;
+  z-index: 1;
+}
+
+.pet--cat .k-head {
+  position: absolute;
+  bottom: 18px;
+  right: 2px;
+  width: 28px;
+  height: 24px;
+  background-color: #b08968;
+  border-radius: 45% 45% 40% 40%;
+  box-shadow: inset -3px -3px 0px #967053;
+  z-index: 3;
+  transition: transform 0.3s ease;
+}
+
+.pet--cat .k-ear {
+  position: absolute;
+  top: -6px;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 9px solid #967053;
+  transition: transform 0.25s ease;
+  transform-origin: bottom center;
+}
+
+.pet--cat .k-ear.left { left: 2px; }
+.pet--cat .k-ear.right { right: 2px; }
+
+/* Headphones */
+.pet--cat .k-band {
+  position: absolute;
+  top: -3px;
+  left: 3px;
+  width: 22px;
+  height: 10px;
+  border: 3px solid #40414d;
+  border-bottom: none;
+  border-radius: 12px 12px 0 0;
+  z-index: 4;
+}
+
+.pet--cat .k-cup {
+  position: absolute;
+  top: 7px;
+  width: 7px;
+  height: 10px;
+  background-color: #40414d;
+  border-radius: 3px;
+  z-index: 4;
+}
+
+.pet--cat .k-cup.left { left: -2px; }
+.pet--cat .k-cup.right { right: -2px; }
+
+.pet--cat .k-eye {
+  position: absolute;
+  top: 10px;
+  width: 3px;
+  height: 4px;
+  background-color: #2c2420;
+  border-radius: 50%;
+  transition: height 0.3s ease, transform 0.3s ease;
+}
+
+.pet--cat .k-eye.left { left: 7px; }
+.pet--cat .k-eye.right { right: 7px; }
+
+.pet--cat .k-nose {
+  position: absolute;
+  top: 15px;
+  left: 12px;
+  width: 3px;
+  height: 2px;
+  background-color: #e8a1a1;
+  border-radius: 40%;
+}
+
+.pet--cat .k-tail {
+  position: absolute;
+  bottom: 10px;
+  left: -4px;
+  width: 14px;
+  height: 5px;
+  background-color: #967053;
+  border-radius: 4px;
+  transform-origin: right center;
+  animation: cat-tail 3s infinite ease-in-out;
+  z-index: 0;
+}
+
+@keyframes cat-tail {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(-25deg); }
+}
+
+.pet--cat .k-leg {
+  position: absolute;
+  bottom: 4px;
+  width: 6px;
+  height: 7px;
+  background-color: #b08968;
+  border-radius: 0 0 3px 3px;
+  z-index: 0;
+  transition: all 0.3s ease;
+}
+
+.pet--cat .k-leg.front { left: 12px; }
+.pet--cat .k-leg.back { left: 30px; }
+
+/* States */
+.pet--cat.is-idle .k-head {
+  animation: cat-nod 2.2s infinite ease-in-out;
+}
+
+/* Nodding along to the music. */
+@keyframes cat-nod {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-2px) rotate(-2deg); }
+}
+
+.pet--cat.is-walking .k-leg.front { animation: cat-step 0.4s infinite; }
+.pet--cat.is-walking .k-leg.back { animation: cat-step 0.4s infinite reverse; }
+
+@keyframes cat-step {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+.pet--cat.is-happy .k-ear.left { transform: rotate(-15deg); }
+.pet--cat.is-happy .k-ear.right { transform: rotate(15deg); }
+
+.pet--cat.is-happy .k-eye {
+  height: 2px;
+  transform: translateY(1px);
+}
+
+/* Sleep-loaf: closed eyes, tucked legs, slow breathing. */
+.pet--cat.is-retreated .k-eye {
+  height: 1px;
+  transform: translateY(2px);
+}
+
+.pet--cat.is-retreated .k-leg {
+  transform: translateY(4px);
+  opacity: 0;
+}
+
+.pet--cat.is-retreated .k-tail {
+  animation: none;
+  transform: rotate(8deg);
+}
+
+.pet--cat.is-retreated .k-body {
+  animation: cat-breathe 2.6s infinite ease-in-out;
+}
+
+@keyframes cat-breathe {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(0.94); }
+}

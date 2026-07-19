@@ -1,0 +1,20 @@
+appId: com.jrsimot.lofipets
+productName: Lofi Pets
+directories:
+  output: dist
+files:
+  - src/**/*
+  - assets/**/*
+  - package.json
+mac:
+  target:
+    - target: dmg
+      arch:
+        - universal
+  category: public.app-category.entertainment
+  identity: null
+win:
+  target: nsis
+nsis:
+  oneClick: true
+  perMachine: false

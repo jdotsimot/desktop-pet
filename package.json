@@ -1,0 +1,30 @@
+{
+  "name": "desktop-pet",
+  "productName": "Lofi Pets",
+  "version": "2.0.0",
+  "description": "A minimalist lofi desktop pet with radio, notifications, and friends.",
+  "main": "src/main/main.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "electron .",
+    "gen-icons": "node scripts/gen-icon.js",
+    "dist": "electron-builder -mw",
+    "dist:mac": "electron-builder --mac",
+    "dist:win": "electron-builder --win"
+  },
+  "author": "jrsimot",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jdotsimot/desktop-pet.git"
+  },
+  "devDependencies": {
+    "electron": "^34.3.0",
+    "electron-builder": "^25.1.8",
+    "sharp": "^0.33.5"
+  },
+  "dependencies": {
+    "bplist-parser": "^0.3.2",
+    "sql.js": "^1.12.0"
+  }
+}

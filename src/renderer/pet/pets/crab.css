@@ -1,0 +1,166 @@
+/* Clawde the Crab — Anthropic-coral, walks sideways, raises claws when happy. */
+.pet--crab .pet-body {
+  width: 70px;
+  height: 56px;
+}
+
+.pet--crab .c-shell {
+  position: absolute;
+  bottom: 10px;
+  left: 13px;
+  width: 44px;
+  height: 30px;
+  background-color: #da7756;
+  border-radius: 50% 50% 35% 35%;
+  box-shadow: inset -4px -5px 0px #c15f3c;
+  z-index: 2;
+}
+
+.pet--crab .c-smile {
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+  width: 12px;
+  height: 6px;
+  border: 2px solid #7c3a22;
+  border-top: none;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-radius: 0 0 10px 10px;
+}
+
+.pet--crab .c-eyestalk {
+  position: absolute;
+  bottom: 36px;
+  width: 3px;
+  height: 12px;
+  background-color: #c15f3c;
+  border-radius: 2px;
+  z-index: 1;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform-origin: bottom center;
+}
+
+.pet--crab .c-eyestalk.left { left: 24px; }
+.pet--crab .c-eyestalk.right { right: 24px; }
+
+.pet--crab .c-eye {
+  position: absolute;
+  top: -5px;
+  left: -2.5px;
+  width: 8px;
+  height: 8px;
+  background-color: #fff;
+  border: 2px solid #7c3a22;
+  border-radius: 50%;
+}
+
+.pet--crab .c-eye::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 3px;
+  height: 3px;
+  background-color: #2c1a12;
+  border-radius: 50%;
+}
+
+.pet--crab .c-claw {
+  position: absolute;
+  bottom: 26px;
+  width: 16px;
+  height: 14px;
+  background-color: #da7756;
+  border-radius: 50% 50% 50% 10%;
+  box-shadow: inset -2px -2px 0px #c15f3c;
+  z-index: 3;
+  transition: transform 0.3s ease;
+  transform-origin: bottom center;
+}
+
+.pet--crab .c-claw.left {
+  left: 0;
+  transform: rotate(-15deg);
+}
+
+.pet--crab .c-claw.right {
+  right: 0;
+  transform: rotate(15deg) scaleX(-1);
+}
+
+/* Claw notch */
+.pet--crab .c-claw::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  right: -1px;
+  width: 6px;
+  height: 5px;
+  background-color: transparent;
+  border-radius: 50%;
+  box-shadow: 2px -1px 0 1px rgba(255, 255, 255, 0.0);
+}
+
+.pet--crab .c-legs {
+  position: absolute;
+  bottom: 4px;
+  display: flex;
+  gap: 4px;
+  z-index: 1;
+}
+
+.pet--crab .c-legs.left { left: 8px; }
+.pet--crab .c-legs.right { right: 8px; }
+
+.pet--crab .c-legs i {
+  width: 4px;
+  height: 9px;
+  background-color: #c15f3c;
+  border-radius: 2px;
+  transform: rotate(0deg);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.pet--crab .c-legs.left i { transform: rotate(18deg); }
+.pet--crab .c-legs.right i { transform: rotate(-18deg); }
+
+/* States */
+.pet--crab.is-idle .c-claw.left { animation: crab-claw-bob 2.4s infinite ease-in-out; }
+.pet--crab.is-idle .c-claw.right { animation: crab-claw-bob-r 2.4s infinite ease-in-out 1.2s; }
+
+@keyframes crab-claw-bob {
+  0%, 100% { transform: rotate(-15deg); }
+  50% { transform: rotate(-28deg) translateY(-2px); }
+}
+
+@keyframes crab-claw-bob-r {
+  0%, 100% { transform: rotate(15deg) scaleX(-1); }
+  50% { transform: rotate(28deg) scaleX(-1) translateY(-2px); }
+}
+
+.pet--crab.is-walking .c-legs.left i { animation: crab-scuttle 0.3s infinite; }
+.pet--crab.is-walking .c-legs.right i { animation: crab-scuttle 0.3s infinite reverse; }
+.pet--crab.is-walking .c-legs i:nth-child(2) { animation-delay: 0.1s; }
+.pet--crab.is-walking .c-legs i:nth-child(3) { animation-delay: 0.2s; }
+
+@keyframes crab-scuttle {
+  0%, 100% { transform: rotate(14deg) translateY(0); }
+  50% { transform: rotate(24deg) translateY(-3px); }
+}
+
+.pet--crab.is-happy .c-claw.left { transform: rotate(-60deg) translateY(-6px); }
+.pet--crab.is-happy .c-claw.right { transform: rotate(60deg) scaleX(-1) translateY(-6px); }
+
+.pet--crab.is-retreated .c-eyestalk {
+  transform: scaleY(0.1);
+  opacity: 0;
+}
+
+.pet--crab.is-retreated .c-claw.left { transform: rotate(30deg) translate(14px, 8px); }
+.pet--crab.is-retreated .c-claw.right { transform: rotate(-30deg) scaleX(-1) translate(14px, 8px); }
+
+.pet--crab.is-retreated .c-legs i {
+  transform: scaleY(0.2);
+  opacity: 0.4;
+}

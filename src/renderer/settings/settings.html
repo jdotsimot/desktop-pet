@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Lofi Pets Settings</title>
+  <link rel="stylesheet" href="settings.css">
+  <link rel="stylesheet" href="../pet/pets/tortoise.css">
+  <link rel="stylesheet" href="../pet/pets/ghost.css">
+  <link rel="stylesheet" href="../pet/pets/crab.css">
+  <link rel="stylesheet" href="../pet/pets/robot.css">
+  <link rel="stylesheet" href="../pet/pets/cat.css">
+  <link rel="stylesheet" href="../pet/pets/blob.css">
+</head>
+<body>
+  <nav id="sidebar">
+    <h1>Lofi Pets</h1>
+    <button class="nav-btn active" data-section="pets">Pets</button>
+    <button class="nav-btn" data-section="radio">Radio</button>
+    <button class="nav-btn" data-section="notifications">Notifications</button>
+    <button class="nav-btn" data-section="about">About</button>
+  </nav>
+
+  <main>
+    <!-- PETS -->
+    <section id="section-pets" class="section active">
+      <h2>Choose your pet</h2>
+      <p class="hint">Your buddy switches instantly — no restart needed.</p>
+      <div id="pet-grid"></div>
+    </section>
+
+    <!-- RADIO -->
+    <section id="section-radio" class="section">
+      <h2>Radio</h2>
+      <p class="hint">
+        Paste a direct audio stream URL or a YouTube link (live channels work great —
+        use the watch/live URL). The station type is detected automatically.
+      </p>
+
+      <div class="row player-row">
+        <button id="radio-toggle" class="btn primary">▶ Play</button>
+        <div id="radio-status" class="radio-status">Stopped</div>
+      </div>
+
+      <div class="row">
+        <label for="volume">Volume</label>
+        <input type="range" id="volume" min="0" max="1" step="0.05">
+        <span id="volume-label"></span>
+      </div>
+
+      <h3>Stations <span class="hint-inline">(5 presets)</span></h3>
+      <div id="preset-list"></div>
+    </section>
+
+    <!-- NOTIFICATIONS -->
+    <section id="section-notifications" class="section">
+      <h2>Notifications</h2>
+      <p class="hint">
+        When enabled, your pet announces incoming desktop notifications from other
+        apps in its speech bubble.
+      </p>
+
+      <label class="toggle-row">
+        <input type="checkbox" id="notif-enabled">
+        <span>Mirror desktop notifications</span>
+      </label>
+
+      <label class="toggle-row">
+        <input type="checkbox" id="notif-show-app">
+        <span>Show which app sent the notification</span>
+      </label>
+
+      <div id="perm-card" class="perm-card">
+        <div class="perm-head">
+          <span>Permission</span>
+          <span id="perm-pill" class="pill">checking…</span>
+        </div>
+        <p id="perm-copy"></p>
+        <button id="perm-grant" class="btn hidden">Open System Settings</button>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="section-about" class="section">
+      <h2>About</h2>
+      <p id="about-version" class="hint"></p>
+      <h3>Controls</h3>
+      <table class="controls">
+        <tr><td>Click</td><td>Pet your buddy</td></tr>
+        <tr><td>Triple-click</td><td>Toggle the radio</td></tr>
+        <tr><td>Click &amp; drag</td><td>Move your buddy around</td></tr>
+        <tr><td>6+ rapid clicks</td><td>Too much! They need a moment.</td></tr>
+        <tr><td>Right-click</td><td>Quick menu (radio, settings, quit)</td></tr>
+        <tr><td>Tray icon</td><td>Radio controls, settings, quit</td></tr>
+      </table>
+      <p class="hint">Made with 🩵 and CSS. No sprites were harmed.</p>
+    </section>
+  </main>
+
+  <script src="../pet/pets/tortoise.js"></script>
+  <script src="../pet/pets/ghost.js"></script>
+  <script src="../pet/pets/crab.js"></script>
+  <script src="../pet/pets/robot.js"></script>
+  <script src="../pet/pets/cat.js"></script>
+  <script src="../pet/pets/blob.js"></script>
+  <script src="settings.js"></script>
+</body>
+</html>
